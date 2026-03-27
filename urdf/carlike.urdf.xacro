@@ -227,6 +227,7 @@
   <ros2_control name="CarLikeSystem" type="system">
     <hardware>
       <plugin>mock_components/GenericSystem</plugin>
+      <param name="calculate_dynamics">true</param>
     </hardware>
 
     <joint name="front_left_steer_joint">
