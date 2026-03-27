@@ -13,7 +13,7 @@ Visualization Manager:
       Cell Size: 1
       Plane: XY
       Plane Cell Count: 10
-      Reference Frame: base_link
+      Reference Frame: /odom
       Color: 160; 160; 164
       Alpha: 0.5
 
@@ -37,7 +37,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: /odom
     Frame Rate: 30
   Name: root
   Tools:

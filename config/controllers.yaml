@@ -5,26 +5,41 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    steering_position_controller:
-      type: forward_command_controller/ForwardCommandController
+    ackermann_steering_controller:
+      type: ackermann_steering_controller/AckermannSteeringController
 
-    wheel_velocity_controller:
-      type: forward_command_controller/ForwardCommandController
-
-
-steering_position_controller:
+ackermann_steering_controller:
   ros__parameters:
-    joints:
-      - front_left_steer_joint
-      - front_right_steer_joint
-    interface_name: position
-
-
-wheel_velocity_controller:
-  ros__parameters:
-    joints:
-      - front_left_wheel_joint
-      - front_right_wheel_joint
-      - rear_left_wheel_joint
+    traction_joints_names:
       - rear_right_wheel_joint
-    interface_name: velocity
+      - rear_left_wheel_joint
+
+    steering_joints_names:
+      - front_right_steer_joint
+      - front_left_steer_joint
+
+    # geometria do veículo
+    wheelbase: 0.325
+    traction_track_width: 0.25
+    # opcional; se omitido, usa traction_track_width
+    steering_track_width: 0.25
+    traction_wheels_radius: 0.05
+
+    # odometria / tf
+    base_frame_id: base_link
+    odom_frame_id: odom
+    enable_odom_tf: true
+
+    # feedback e odometria
+    open_loop: false
+    position_feedback: false
+    velocity_rolling_window_size: 10
+    reference_timeout: 1.0
+
+    # covariâncias
+    twist_covariance_diagonal: [0.0, 7.0, 14.0, 21.0, 28.0, 35.0]
+    pose_covariance_diagonal: [0.0, 7.0, 14.0, 21.0, 28.0, 35.0]
+  
+    open_loop: false
+    position_feedback: false
+    reference_timeout: 2.0

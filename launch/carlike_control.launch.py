@@ -32,19 +32,11 @@ def generate_launch_description():
         package='controller_manager',
         executable='spawner',
         arguments=[
-            'steering_position_controller',
+            'ackermann_steering_controller',
             '--controller-manager',
             '/controller_manager',
-        ],
-    )
-
-    wheel_controller_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=[
-            'wheel_velocity_controller',
-            '--controller-manager',
-            '/controller_manager',
+            '--controller-ros-args',
+            '--ros-args --remap /ackermann_steering_controller/tf_odometry:=/tf --remap /ackermann_steering_controller/odometry:=/odom',
         ],
     )
 
@@ -83,7 +75,6 @@ def generate_launch_description():
             robot_state_publisher_node,
             rviz_node, 
             steering_controller_spawner,
-            wheel_controller_spawner,
             joint_state_broadcaster_spawner
             ]
 
